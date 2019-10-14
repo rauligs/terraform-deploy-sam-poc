@@ -1,0 +1,33 @@
+driver:
+  name: terraform
+  root_module_directory: terraform
+  backend_configurations:
+    region: "eu-west-1"
+    bucket: "thenesor-tf-states"
+    key: "test-states/terraform-test.tfstate"
+
+provisioner:
+  name: terraform
+
+verifier:
+  name: terraform
+
+platforms:
+  - name: remote
+    verifier:
+      systems:
+        - name: aws
+          backend: aws
+
+suites:
+  - name: default
+    driver:
+      variables:
+        s3_remote_state_bucket_name: "thenesor-tf-states"
+        cicd_project_name: "test-project-cicd"
+        cicd_codebuild_project_description: "test-cicd-project_description"
+        cicd_iam_role_name: "test-cicd-iam-role-name"
+        cicd_bucket_name: "test-cicd-thenesor-bucket"
+        github_repo_name: "countries-api"
+        github_owner: "rauligs"
+        github_token: <%= ENV['GITHUB_TOKEN'] %>
