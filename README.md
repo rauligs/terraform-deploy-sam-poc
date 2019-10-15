@@ -211,8 +211,17 @@ terraform fmt -check
 bundle install
 ```
 
-* Run tests:
+* Run tests (converge + verify + destroy):
 ```shell script
 GITHUB_TOKEN=your_github_token_here bundle exec kitchen test -d always
 ```
 
+* Manual test deployed infra:
+```shell script
+GITHUB_TOKEN=your_github_token_here bundle exec kitchen converge
+```
+
+* Manual destroy deployed infra:
+```shell script
+GITHUB_TOKEN=your_github_token_here bundle exec kitchen destroy
+```
